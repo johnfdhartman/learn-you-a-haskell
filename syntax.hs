@@ -35,3 +35,43 @@ randomShit shit
   | shit < (-1) = "too small"
   | abs shit < 1 = "just right"
   | otherwise = "who the hell do you think you are?"
+
+
+max' :: (Ord a) => a -> a -> a
+max' a b
+  | a >= b = a
+  | otherwise = b
+
+myCompare :: (Ord a) => a -> a -> Ordering
+a `myCompare` b
+  | a > b = GT
+  | a == b = EQ
+  | otherwise = LT
+
+randomCrap :: (RealFloat a) => a -> a -> String
+randomCrap a b
+  | abs crap < 1 = "Conservative"
+  | abs crap < 5 = "A bit dangerous"
+  | otherwise = "Show off"
+  where crap = a/b^2
+
+initials :: String -> String -> String
+initials firstName lastName = [f] ++ ". " ++ [l]
+  where (f:_) = firstName
+        (l:_) = lastName
+
+calcBmis :: RealFloat a => [(a,a)] -> [a]
+calcBmis bmis = [bmi weight height | (weight, height) <- bmis]
+  where bmi weight height = weight / height ^ 2
+
+calcBmis' :: RealFloat a => [(a,a)] -> [a]
+calcBmis' bmis =
+  let bmi weight height = weight / height ^ 2
+  in [bmi weight height | (weight, height) <- bmis]
+
+calcBmis'' :: RealFloat a => [(a,a)] -> [a]
+calcBmis'' bmis = [bmi | (w, h) <- bmis, let bmi = w / h^2]
+
+head'' :: [a] -> a
+head'' xs = case xs of [] -> error "Nope!"
+                       (x:_) -> x
